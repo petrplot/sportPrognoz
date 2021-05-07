@@ -1,6 +1,6 @@
 # New project for site "SportPrognoz"
 
-This is draft one-page application
+This is a draft one-page application
 for publishing sports reviews and sports predictions.
 
 Это проект одностраничного прилажения
