@@ -1,6 +1,9 @@
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+
 const errorHandler = require('../utilities/errorHandler')
 const User = require('../models/User')
-const bcrypt = require('bcrypt')
+const keys = require('../config/keys')
 
 module.exports.register = async(req,res)=>{
 
@@ -39,6 +42,49 @@ module.exports.register = async(req,res)=>{
 	}
 }
 
-module.exports.login = async()=>{
+module.exports.login = async(req,res)=>{
+
+	try {
+
+		//ищем пользователя по email
+		const candidate = await User.findOne({email:req.body.email})
+
+		if (candidate) {
+
+			//сверяем пароли
+			const passRes = bcrypt.compareSync(req.body.password, candidate.password)
+
+			if(passRes){
+
+				//создаем токен
+				const token = jwt.sign({
+					email:candidate.email,
+					userId:candidate._id
+				},keys.jwt,{ expiresIn: "1h" })
+				res.status(200).json({token:`Bearer ${token}`})
+
+			}else {
+
+				//пароли не совпали
+				res.status(401).json({
+					message: 'Неверный пароль!'
+				})
+			
+			}
+			
+		}else{
+
+				// пользователь не найден
+			res.status(404).json({
+				message: ' Пользователь с таким email не найден!'
+			})
+
+		}
+		
+	} catch (e) {
+		
+		errorHandler(res, e)
+
+	}
 	
 }
