@@ -2,8 +2,8 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const passport = require('passport')
 
-const passport = require('./middleware/passport')
 const keys = require('./config/keys')
 const reviewRout = require('./routes/reviews')
 const privateOfficeRout = require('./routes/private office')
@@ -24,6 +24,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(passport.initialize())
 app.use('/uploads', express.static('uploads'))
+require('./middleware/passport')(passport)
 
 
 

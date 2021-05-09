@@ -12,7 +12,7 @@ module.exports.register = async(req,res)=>{
 	
 	if (candidate) {
 
-		res.status(409).json({
+		res.json(409, {
 			message: "Данный email уже занят!"
 		})
 
