@@ -32,7 +32,7 @@ module.exports.register = async(req,res)=>{
 		try {
 
 			await user.save()
-			res.status(201).json(user, console.log("Пользователь создан!"))
+			res.json(201, user, console.log("Пользователь создан!"))
 			
 		} catch (e) {
 
@@ -61,7 +61,8 @@ module.exports.login = async(req,res)=>{
 					email:candidate.email,
 					userId:candidate._id
 				},keys.jwt,{ expiresIn: "1h" })
-				res.status(200).json({token:`Bearer ${token}`})
+
+				res.json(200, {token:`Bearer ${token}`})
 
 			}else {
 
