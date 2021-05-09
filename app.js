@@ -3,6 +3,7 @@ const app = express()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 
+const passport = require('./middleware/passport')
 const keys = require('./config/keys')
 const reviewRout = require('./routes/reviews')
 const privateOfficeRout = require('./routes/private office')
@@ -21,7 +22,10 @@ const sportPredictionsAllRout = require('./routes/spotrPredictions/sportsPredict
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(passport.initialize())
 app.use('/uploads', express.static('uploads'))
+
+
 
 app.use('/', homeRout)
 app.use('/review', reviewRout)
