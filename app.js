@@ -15,31 +15,9 @@ const statisticsRout = require('./routes/statistics')
 const trainingRout = require('./routes/training')
 const bookmakerRout = require('./routes/bookmaker')
 
-
 const sportPredictionsTodayRout = require('./routes/spotrPredictions/sportPredictionsToday')
 const sportPredictionsTomorrowRout = require('./routes/spotrPredictions/sportPredictionsTomorrow')
 const sportPredictionsAllRout = require('./routes/spotrPredictions/sportsPredictionsAll')
-
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(passport.initialize())
-app.use('/uploads', express.static('uploads'))
-require('./middleware/passport')(passport)
-
-
-
-app.use('/', homeRout)
-app.use('/review', reviewRout)
-app.use('/private_office', privateOfficeRout)
-app.use('/auth', authRout)
-app.use('/article', articleRout)
-app.use('/', listArticleRout)
-app.use('/', statisticsRout)
-app.use('/training', trainingRout)
-app.use('/bookmaker', bookmakerRout)
-app.use('/', sportPredictionsTodayRout)
-app.use('/', sportPredictionsTomorrowRout)
-app.use('/spa', sportPredictionsAllRout)
 
 async function start() {
 	try {
@@ -61,6 +39,26 @@ async function start() {
 	}
 }
 start()
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(passport.initialize())
+app.use('/uploads', express.static('uploads'))
+require('./middleware/passport')(passport)
+
+app.use('/', homeRout)
+app.use('/review', reviewRout)
+app.use('/private_office', privateOfficeRout)
+app.use('/auth', authRout)
+app.use('/article', articleRout)
+app.use('/', listArticleRout)
+app.use('/', statisticsRout)
+app.use('/training', trainingRout)
+app.use('/bookmaker', bookmakerRout)
+app.use('/', sportPredictionsTodayRout)
+app.use('/', sportPredictionsTomorrowRout)
+app.use('/spa', sportPredictionsAllRout)
+
 
 
 

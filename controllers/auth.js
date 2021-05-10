@@ -62,7 +62,7 @@ module.exports.login = async(req,res)=>{
 					userId:candidate._id
 				},keys.jwt,{ expiresIn: "1h" })
 
-				res.json(200, {token:`Bearer ${token}`})
+				res.status(200).json({token:`Bearer ${token}`})
 
 			}else {
 
