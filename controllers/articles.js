@@ -10,14 +10,14 @@ module.exports.create = async(req, res)=>{
 		title: req.body.title,
 		text: req.body.text,
 		description: req.body.description,
-		author: req.body.author ? req.body.author : author.default,
+		author: req.body.author ? req.body.author: "",
 		imageSrc: req.file ? req.file.path : ''
 	})
 
 	try {
 
 		await article.save()
-		res.json(201, article)
+		res.status(201).json(article)
 		
 	} catch (e) {
 
