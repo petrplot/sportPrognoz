@@ -10,7 +10,7 @@ module.exports.create = async(req, res)=>{
 		title: req.body.title,
 		text: req.body.text,
 		description: req.body.description,
-		author: req.body.author ? req.body.author: "",
+		author: req.body.author ? req.body.author: undefined,
 		imageSrc: req.file ? req.file.path : ''
 	})
 
