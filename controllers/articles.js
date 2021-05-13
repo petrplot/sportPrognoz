@@ -1,14 +1,42 @@
 const articleCreate = require('../service/articleService')
+const articleGetById = require('../service/articleService')
+const articleGetAll = require('../service/articleService')
 const errorHandler = require('../utilities/errorHandler')
 
-module.exports.getByArticleId = async()=>{
+module.exports.getAll = async(req, res)=>{
+	try {
+		
+		const articles = await articleGetAll(req)
+
+		res.status(201).json(articles)
+		
+	} catch (e) {
+
+		errorHandler(res, e)
+
+	}
+
+}
+
+module.exports.getById = async(req, res)=>{
+	try {
+		
+		const article = await articleGetById(req)
+
+		res.status(201).json(article)
+		
+	} catch (e) {
+
+		errorHandler(res, e)
+
+	}
 
 }
 module.exports.create = async(req, res)=>{
 	
-	const article = articleCreate(req)
-
 	try {
+		
+		const article = await articleCreate(req)
 
 		await article.save()
 		res.status(201).json(article)

@@ -14,3 +14,18 @@ module.exports = articleCreate = (data) => {
 	}
 }
 
+module.exports = articleGetById = (data) => {
+
+	const article = Article.findById(data.params.id)
+
+	return article
+
+}
+
+module.exports = articleGetAll = (data) => {
+	
+	const articles = Article.find({})
+	return articles
+	
+}
+
