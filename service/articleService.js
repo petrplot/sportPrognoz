@@ -24,8 +24,33 @@ module.exports = articleGetById = (data) => {
 
 module.exports = articleGetAll = (data) => {
 	
-	const articles = Article.find({})
+	const articles = Article.find()
 	return articles
 	
 }
+
+// module.exports = articleUpdate = (data) => {
+// 	const updated = data.body
+
+// 	if(!updated._id){
+// 		console.log(" id не указан")
+// 	}
+
+// 	if (data.file) {
+// 		updated.imageSrc = data.file.path
+// 	}
+
+// 	const article = Article.findByIdAndUpdate(
+// 		updated._id, 
+// 		updated,
+// 		{new:true},
+// 		function(err, article){
+// 			if(err) return console.log(err)
+// 			console.log("Обновленный объект", article)
+// 		}
+// 	)
+// 	return article	
+// }
+
+
 
