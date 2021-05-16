@@ -29,6 +29,7 @@ module.exports = articleGetAll = (data) => {
 	
 }
 
+//при подключении этого метода метод articleGetAll не работает
 // module.exports = articleUpdate = (data) => {
 // 	const updated = data.body
 

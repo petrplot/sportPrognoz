@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "s": "node app.js",
-    "sv": "nodemon app.js"
+    "sv": "nodemon ./"
   },
   "author": "Petr <petr.plotnikov.1989@mail.ru>",
   "license": "ISC",
