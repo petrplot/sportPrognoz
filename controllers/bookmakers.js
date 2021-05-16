@@ -1,4 +1,6 @@
 const Bookmaker =require('../models/Bookmaker')
+const Review = require('../models/Review')
+const errorHandler = require('../utilities/errorHandler')
 
 module.exports.getAll = async(req, res)=>{
 	try {
@@ -20,13 +22,14 @@ module.exports.getById = async(req, res)=>{
 
 module.exports.create = async(req, res)=>{	
 	try {
+		const review = await Review.find()
 		if(req.user.admin){
 			const bookmaker = new Bookmaker({
 				name:req.body.name,
 				description:req.body.description,
 				imageSrc:req.file?req.file.path:"",
-				rating:1,//здесь нужно реализовать вычисление рейтинга
-				reviews:1,//здесь нужно реализовать подсчет количества отзывов
+				rating:req.body.rating,//здесь нужно реализовать вычисление рейтинга
+				reviews:review.length,
 				bonus:req.body.bonus
 			})
 		await bookmaker.save()

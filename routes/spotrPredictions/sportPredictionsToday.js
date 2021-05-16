@@ -1,6 +1,9 @@
 const {Router} = require('express')
 const router = Router()
+const passport = require('passport')
+
 const controller = require('../../controllers/predictions')
+const upload = require('../../middleware/upload')
 
 router.get('/:Id', controller.getById)
 router.get('/', controller.getAll)

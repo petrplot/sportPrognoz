@@ -1,4 +1,5 @@
 const Training =require('../models/Training')
+const errorHandler = require('../utilities/errorHandler')
 
 module.exports.getAll = async(req, res)=>{
 	try {

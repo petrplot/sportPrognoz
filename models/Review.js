@@ -5,6 +5,10 @@ const schema = new Schema({
 	imageSrc:{type: String, default: ''},
 	text:{type: String, default: ''},
 	date:{type:Date, default:Date.now},
+	own:[
+		{ref: 'Bookmaker',type: Schema.Types.ObjectId},
+		{ref: 'Article',type: Schema.Types.ObjectId}
+	]
 })
 
 module.exports = model('Review', schema);

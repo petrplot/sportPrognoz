@@ -1,4 +1,5 @@
 const Prediction =require('../models/Prediction')
+const errorHandler = require('../utilities/errorHandler')
 
 module.exports.getAll = async(req, res)=>{
 	try {
