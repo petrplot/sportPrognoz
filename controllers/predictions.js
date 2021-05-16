@@ -2,8 +2,8 @@ const Prediction =require('../models/Prediction')
 
 module.exports.getAll = async(req, res)=>{
 	try {
-		const bookmakers = await Bookmaker.find()
-		res.status(201).json(bookmakers)
+		const predictions = await Prediction.find()
+		res.status(201).json(predictions)
 	} catch (e) {
 		errorHandler(res, e)
 	}
@@ -11,8 +11,8 @@ module.exports.getAll = async(req, res)=>{
 
 module.exports.getById = async(req, res)=>{
 	try {
-		const bookmaker = await Bookmaker.findById(req.params.id)
-		res.status(201).json(bookmaker)
+		const prediction = await Prediction.findById(req.params.id)
+		res.status(201).json(prediction)
 	} catch (e) {
 		errorHandler(res, e)
 	}
@@ -21,16 +21,24 @@ module.exports.getById = async(req, res)=>{
 module.exports.create = async(req, res)=>{	
 	try {
 		if(req.user.admin){
-			const bookmaker = new Bookmaker({
-				name:req.body.name,
-				description:req.body.description,
-				imageSrc:req.file?req.file.path:"",
-				rating:1,//здесь нужно реализовать вычисление рейтинга
-				reviews:1,//здесь нужно реализовать подсчет количества отзывов
-				bonus:req.body.bonus
+			const prediction = new Prediction({
+				plyer1:[{
+					name:req.body.name,
+					city:req.body.city
+				}],
+				plyer2:[{
+					name:req.body.name,
+					city:req.body.city
+				}],
+				Win:req.body.Win,
+				lose:req.body.lose,
+				draw:req.body.draw,
+				kO:req.body.kO,
+				when:req.body.when?req.body.when:undefined
+				
 			})
-		await bookmaker.save()
-		res.status(201).json(bookmaker)
+		await prediction.save()
+		res.status(201).json(prediction)
 		}
 	} catch (e) {
 		errorHandler(res, e)
@@ -50,16 +58,16 @@ module.exports.create = async(req, res)=>{
 		updated.imageSrc = req.file.path
 	}
 
-	const bookmaker = Bookmaker.findByIdAndUpdate(
+	const prediction = await Prediction.findByIdAndUpdate(
 		updated._id, 
 		updated,
 		{new:true},
-		function(err, bookmaker){
+		function(err, prediction){
 			if(err) return console.log(err)
-			console.log("Обновленный объект", bookmaker)
+			console.log("Обновленный объект", prediction)
 		}
 	)
-		res.status(200).json(bookmaker)
+		res.status(200).json(prediction)
 	} catch (error) {
 		errorHandler(res, error)
 	}
@@ -68,10 +76,10 @@ module.exports.create = async(req, res)=>{
 module.exports.remove = async(req, res)=>{
 	try {
 		const{id} = req.params
-		const bookmaker = await Bookmaker.findByIdAndDelete(id)
+		const prediction = await Prediction.findByIdAndDelete(id)
 
 		res.status(200).json({
-			message: 'Статья удалена.', bookmaker
+			message: 'Статья удалена.', prediction
 		})	
 	} catch (e) {
 		errorHandler(res, e)

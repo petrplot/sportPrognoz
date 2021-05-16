@@ -50,7 +50,7 @@ module.exports.create = async(req, res)=>{
 		updated.imageSrc = req.file.path
 	}
 
-	const bookmaker = Bookmaker.findByIdAndUpdate(
+	const bookmaker = await Bookmaker.findByIdAndUpdate(
 		updated._id, 
 		updated,
 		{new:true},
